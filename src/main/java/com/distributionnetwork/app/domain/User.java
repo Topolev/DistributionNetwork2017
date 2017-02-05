@@ -95,6 +95,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Lob
     private byte[] avatar;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Publication> publications = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -207,6 +212,34 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
+
+    public Set<Publication> getPublications() {
+        return publications;
+    }
+
+    public User publications(Set<Publication> publications) {
+        this.publications = publications;
+        return this;
+    }
+
+    public User addPublications(Publication publication) {
+        publications.add(publication);
+        publication.setUser(this);
+        return this;
+    }
+
+    public User removePublications(Publication publication) {
+        publications.remove(publication);
+        publication.setUser(null);
+        return this;
+    }
+
+    public void setPublications(Set<Publication> publications) {
+        this.publications = publications;
+    }
+
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -20,5 +20,27 @@
 
     <cache alias="com.distributionnetwork.app.domain.User.persistentTokens" uses-template="simple"/>
 
+    <cache alias="com.distributionnetwork.app.domain.JUser" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.JUser.publications" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.Publication" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.Publication.labels" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.Publication.subCategories" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.Category" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.Category.subCategories" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.SubCategory" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.SubCategory.publications" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.Label" uses-template="simple"/>
+
+    <cache alias="com.distributionnetwork.app.domain.Label.publications" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>
