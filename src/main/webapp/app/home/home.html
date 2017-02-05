@@ -1,4 +1,15 @@
 <div ng-cloak>
+
+
+
+    <slick settings="vm.slickConfig" id="main-carousel">
+        <div ng-repeat="slide in vm.slides" style="background-image:url({{slide.image}});">
+
+        </div>
+    </slick>
+
+
+    <!--
     <div class="row">
         <div class="col-md-4">
             <span class="hipster img-responsive img-rounded"></span>
@@ -37,5 +48,5 @@
              <span data-translate="home.like">If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank" data-translate="home.github">Github</a>!
             </p>
         </div>
-    </div>
+    </div>-->
 </div>
