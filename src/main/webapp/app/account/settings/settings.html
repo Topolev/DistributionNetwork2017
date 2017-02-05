@@ -1,6 +1,18 @@
-<div>
+<div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-4">
+            vm.isNonAvailableInitialAvatar {{vm.isNonAvailableInitialAvatar}}<br/>
+            vm.deletedAvatar {{vm.deletedAvatar}}<br/>
+            {{vm.avatarPhoto != undefined && !vm.deletedAvatar ? vm.avatarPhoto : !vm.isNonAvailableInitialAvatar&&!vm.deletedAvatar ? '/api/users/photo/' + vm.settingsAccount.login: 'content/images/nologo.png' }}
+            <div class="wrap-avatar">
+                <img ng-src="{{vm.avatarPhoto != undefined && !vm.deletedAvatar ? vm.avatarPhoto : !vm.isNonAvailableInitialAvatar&&!vm.deletedAvatar ? '/api/users/photo/' + vm.settingsAccount.login: 'content/images/nologo.png' }}"/>
+                <div class="manage-upload-avatar">
+                    <a ng-click="vm.updateAvatar()">Обновить фото</a>
+                    <a ng-click="vm.deleteAvatar()" l>Удалить фото</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
             <h2 data-translate="settings.title" translate-values="{username: '{{vm.settingsAccount.login}}'}">User settings for [<b>{{vm.settingsAccount.login}}</b>]</h2>
 
             <div class="alert alert-success" ng-show="vm.success" data-translate="settings.messages.success">

@@ -1,0 +1,104 @@
+.wrap-avatar {
+    max-width: 200px;
+    position: relative;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+    }
+
+    .manage-upload-avatar {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: -58px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        transition-property: all;
+        transition-duration: 400ms;
+        a {
+            display: block;
+            padding: 5px;
+            color: #fff;
+        }
+        a:hover {
+            color: #ccc;
+            text-decoration: none;
+        }
+    }
+}
+
+.wrap-avatar:hover .manage-upload-avatar {
+    bottom: 0;
+}
+
+/*MODAL UPLOAD PHOTO*/
+
+
+
+#wrap-field-upload-avatar{
+    display: table;
+    width: 100%;
+}
+
+#field-upload-avatar {
+    position: relative;
+    border: 4px dashed #CCCCCC;
+    height: 300px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+#field-crop-avatar .cropArea{
+    width: 100%;
+    min-height:400px;
+    max-height: 600px;
+    height:1px;
+    border: 1px dashed #CCCCCC;
+}
+
+.wrap-buttons{
+    margin:10px;
+}
+
+
+.over-field-crop-avatar{
+    border:4px dashed #35a2b1 !important;
+    background: rgba(53,162,177,0.5);
+}
+
+.wrap-input-file p{
+    display:inline-block;
+    padding:7px 10px;
+    background: #35a2b1;
+    color:#fff;
+    position:relative;
+}
+
+.wrap-input-file p:hover{
+    background: rgba(53,162,177,0.8);
+}
+
+
+#choose-file-avatar{
+    opacity:0;
+    width:100%;
+    height:33px;
+    position:absolute;
+    left:10px;
+    top:7px;
+    margin:-7px -10px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#field-crop-avatar .wrap-buttons{
+    text-align: center;
+}
+#field-crop-avatar .wrap-buttons>a.btn{
+    display:inline-block;
+}
+

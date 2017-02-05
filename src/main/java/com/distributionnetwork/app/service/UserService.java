@@ -8,6 +8,8 @@ import com.distributionnetwork.app.repository.UserRepository;
 import com.distributionnetwork.app.security.AuthoritiesConstants;
 import com.distributionnetwork.app.security.SecurityUtils;
 import com.distributionnetwork.app.service.util.RandomUtil;
+import com.distributionnetwork.app.service.util.ServiceException;
+import com.distributionnetwork.app.service.util.UploadUtil;
 import com.distributionnetwork.app.web.rest.vm.ManagedUserVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -237,5 +239,27 @@ public class UserService {
             log.debug("Deleting not activated user {}", user.getLogin());
             userRepository.delete(user);
         }
+    }
+
+    public void uploadLogo(String file, String login) throws ServiceException {
+        byte[] image = UploadUtil.getImageFromStringBase64(file);
+        userRepository.findOneByLogin(login).ifPresent(user -> {
+            user.setAvatar(image);
+            userRepository.save(user);
+        });
+    }
+
+    public byte[] getLogo(String login) {
+        return userRepository.findOneByLogin(login).map(User::getAvatar).orElse(null);
+    }
+
+    public boolean deleteLogo(String login) {
+        return userRepository.findOneByLogin(login)
+            .map(user -> {
+                user.setAvatar(null);
+                userRepository.save(user);
+                return true;
+            })
+            .orElse(false);
     }
 }

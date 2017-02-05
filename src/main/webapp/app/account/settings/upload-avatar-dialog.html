@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.cancel()">&times;</button>
+    <h4 class="modal-title">Обновить фото профиля</h4>
+</div>
+<div class="modal-body" id="upload-avatar-modal">
+
+    <div class="alert alert-danger" ng-show="vm.isInvalidImageExt">Недопустимое расширение изображения.</div>
+    <div id="wrap-field-upload-avatar">
+        <div id="field-upload-avatar" ng-show="vm.uploadImage==''">
+            <div class="wrap-btn-upload">
+                <p>Перетащите фото в выделенную область</p>
+                <p>или</p>
+
+                <div class="wrap-input-file">
+                    <p><span>Выбрать фото</span>
+                        <input type="file" id="choose-file-avatar" ng-model="vm.chooseAvatar"
+                               ng-change="vm.handleSelectFile()"/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-show="vm.uploadImage!=''" id="field-crop-avatar">
+        <div class="cropArea">
+            <img-crop image="vm.uploadImage" result-image="vm.croppedImage"></img-crop>
+        </div>
+        <div class="wrap-buttons">
+            <a class="btn btn-primary" ng-click="vm.returnUploadImage()">Назад</a>
+            <a class="btn btn-primary" ng-click="vm.saveImage()">Сохранить</a>
+        </div>
+    </div>
+
+</div>
+

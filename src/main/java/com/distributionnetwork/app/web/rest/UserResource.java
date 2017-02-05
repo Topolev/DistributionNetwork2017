@@ -7,6 +7,7 @@ import com.distributionnetwork.app.repository.UserRepository;
 import com.distributionnetwork.app.security.AuthoritiesConstants;
 import com.distributionnetwork.app.service.MailService;
 import com.distributionnetwork.app.service.UserService;
+import com.distributionnetwork.app.service.util.ServiceException;
 import com.distributionnetwork.app.web.rest.vm.ManagedUserVM;
 import com.distributionnetwork.app.web.rest.util.HeaderUtil;
 import com.distributionnetwork.app.web.rest.util.PaginationUtil;
@@ -22,10 +23,19 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.distributionnetwork.app.web.rest.util.HeaderUtil.createFailureAlert;
+import static java.util.Optional.ofNullable;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * REST controller for managing users.
@@ -180,5 +190,36 @@ public class UserResource {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/users/uploadlogo", method = POST)
+    public ResponseEntity<Void> uploadLogo(
+        @RequestParam(value = "file", required = false) String file, @RequestParam(value = "login") String login)
+        throws IOException {
+        try {
+            userService.uploadLogo(file, login);
+            return new ResponseEntity<>(OK);
+        } catch (ServiceException e) {
+            log.debug("Can not upload logo for user with id = {}", login);
+            return new ResponseEntity<>(
+                createFailureAlert(e.getEntityName(), e.getErrorKey(), e.getDefaultMessage()), BAD_REQUEST);
+        }
+    }
+
+
+    @RequestMapping(value = "/users/photo/{login:" + Constants.LOGIN_REGEX + "}", method = DELETE)
+    public ResponseEntity<Void> deleteLogo(@PathVariable String login) throws IOException {
+        return userService.deleteLogo(login) ? new ResponseEntity<>(OK) : new ResponseEntity<>(BAD_REQUEST);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/users/photo/{login:" + Constants.LOGIN_REGEX + "}", method = GET)
+    public ResponseEntity<byte[]> downloadLogo(@PathVariable String login) {
+        return ofNullable(userService.getLogo(login))
+            .map(logo -> new ResponseEntity<>(logo, OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
+
     }
 }
