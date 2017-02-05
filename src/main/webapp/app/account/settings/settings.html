@@ -1,10 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            vm.isNonAvailableInitialAvatar {{vm.isNonAvailableInitialAvatar}}<br/>
-            vm.deletedAvatar {{vm.deletedAvatar}}<br/>
-            {{vm.avatarPhoto != undefined && !vm.deletedAvatar ? vm.avatarPhoto : !vm.isNonAvailableInitialAvatar&&!vm.deletedAvatar ? '/api/users/photo/' + vm.settingsAccount.login: 'content/images/nologo.png' }}
             <div class="wrap-avatar">
+                <h2>Аватар</h2>
                 <img ng-src="{{vm.avatarPhoto != undefined && !vm.deletedAvatar ? vm.avatarPhoto : !vm.isNonAvailableInitialAvatar&&!vm.deletedAvatar ? '/api/users/photo/' + vm.settingsAccount.login: 'content/images/nologo.png' }}"/>
                 <div class="manage-upload-avatar">
                     <a ng-click="vm.updateAvatar()">Обновить фото</a>

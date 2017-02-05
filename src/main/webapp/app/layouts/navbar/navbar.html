@@ -16,7 +16,7 @@
         </div>
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active">
+                <!--<li ui-sref-active="active">
                     <a ui-sref="home">
                         <span class="hidden-sm">Форум</span>
                     </a>
@@ -25,15 +25,15 @@
                     <a href="">
                         <span class="hidden-sm">Статьи</span>
                     </a>
-                </li>
+                </li>-->
                 <li ui-sref-active="active">
-                    <a href="">
-                        <span class="hidden-sm">События</span>
+                    <a  ui-sref="all-publications">
+                        <span class="hidden-sm">Публикации</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
-                    <a href="">
-                        <span class="hidden-sm">Расчеты</span>
+                    <a ui-sref="user">
+                        <span class="hidden-sm">Пользователи</span>
                     </a>
                 </li>
                 <li ui-sref-active="active" ng-switch-when="false">

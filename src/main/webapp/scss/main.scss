@@ -1,5 +1,6 @@
 @import "custom-bootstrap";
 @import "custom-setting-account";
+@import "custom-users";
 
 /*FONTS*/
 @font-face {
@@ -20,6 +21,12 @@
 
 body{
     font-family: Oswald;
+}
+
+
+/*COMMON SETTINGS*/
+.vertical-align-center tbody tr td{
+    vertical-align: middle;
 }
 
 /*NAVBAR*/
