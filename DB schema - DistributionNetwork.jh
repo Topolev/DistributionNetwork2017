@@ -1,0 +1,289 @@
+/**
+  *Entities
+  */
+
+//User entities
+
+entity User{
+ 	id Long required,
+ 	nickname String required,
+ 	name String required, //TODO: really required?
+ 	surname String required, //TODO: really required?
+	description String,
+    createdDate ZonedDateTime required, //TODO: really need it?
+	ratingPlus Integer,
+	ratingMinus Integer,
+    locationCountry String required,
+    locationRegion String required,
+    locationCity String required
+ }
+ 
+entity DirectMessages{
+	id Long required,
+	idUser1 Long required,
+	idUser2 Long required,
+	isSended Boolean required, //True - is sended, false - is draft
+	text String required
+    sendDate ZonedDateTime required,
+}
+
+//Location entities
+//TODO: check needs of it, may be this can be replaced.
+entity LocationCountry {
+ 	id Long required,
+    name String required,
+}
+entity LocationRegion {
+ 	id Long required,
+    name String required,
+}
+entity LocationCity {
+ 	id Long required,
+    name String required,
+}
+ 
+//Publication entities 
+
+entity Publication {
+ 	id Long required,
+    name String required,
+    text String required,
+    isPublished Boolean required, //True - is published, false - is draft
+    publishingDate ZonedDateTime,
+    ratingPlus Integer,
+    ratingMinus Integer
+}
+entity CategoryPublication{
+ 	id Long required,
+    name String required
+}
+entity SubCategoryPublication{
+ 	id Long required,
+    name String required
+}
+entity PublicationComments {
+ 	id Long required,
+    text String required,
+    publishingDate ZonedDateTime required,
+    ratingPlus Integer required,
+    ratingMinus Integer required
+}
+entity LabelPublication{
+	id Long required,
+	name String required
+}
+
+//Events entities
+
+entity Event{
+	id Long required,
+	name String required,
+	text String required,
+	eventDate ZonedDateTime required,
+	eventPlace String required //TODO: support geodata?
+}
+entity EventComments {
+ 	id Long required,
+    text String required,
+    publishingDate ZonedDateTime required,
+    ratingPlus Integer required,
+    ratingMinus Integer required
+}
+
+//Library entites
+
+entity Library{
+ 	id Long required,
+    name String required,
+    description String required,
+    uploadDate ZonedDateTime required
+}
+entity CategoryLibrary{
+ 	id Long required,
+    name String required
+}
+entity SubCategoryLibrary{
+ 	id Long required,
+    name String required
+}
+entity CategoryEmployment{
+ 	id Long required,
+    name String required
+}
+entity SubCategoryEmployment{
+ 	id Long required,
+    name String required
+}
+entity LibraryComments {
+ 	id Long required,
+    text String required,
+    publishingDate ZonedDateTime required,
+    ratingPlus Integer required,
+    ratingMinus Integer required
+}
+entity LabelLibrary{
+	id Long required,
+	name String required
+}
+
+//Employment entites
+
+entity EmploymentCV{
+ 	id Long required,
+    name String required,
+    text String required,
+    lastUpdateDate ZonedDateTime required
+}
+entity EmploymentJob{
+ 	id Long required,
+    name String required,
+    text String required,
+    lastUpdateDate ZonedDateTime required
+}
+entity LabelEmployment{
+	id Long required,
+    name String required
+}
+
+//QAS (question-answering system) entities
+
+entity Question{
+	id Long required,
+    name String required,
+	text String required,
+	createdDate ZonedDateTime,
+	ratingPlus Integer,
+	ratingMinus Integer,
+}
+
+entity Answer{
+	id Long required,
+    name String required,
+	text String required,
+	createdDate ZonedDateTime,
+	ratingPlus Integer,
+	ratingMinus Integer,
+}
+
+entity QASLabels{
+	id Long,
+	text String
+}
+
+/**
+  *Relationships
+  */
+
+//User relationships
+
+relationship OneToMany {
+	User{employmentcv} to EmploymentCV{user}
+}
+relationship OneToMany{
+	User{library} to Library{user}
+}
+relationship OneToMany{
+	User{publication} to Publication{user}
+}
+relationship OneToMany{
+	User{publicationcomments} to PublicationComments{user}
+}
+relationship OneToMany{
+	User{librarycomments} to LibraryComments{user}
+}
+relationship ManyToMany{
+	User{directmessages} to DirectMessages{user}
+}
+relationship OneToMany{
+	User{question} to Question{user}
+}
+relationship OneToMany{
+	User{eventcomments} to EventComments{user}
+}
+relationship OneToMany{
+	User{answer} to Answer{user}
+}
+
+//Location relationships
+//TODO: check needs of it, may be this can be replaced.
+relationship OneToMany{
+	LocationCountry{locationregion} to LocationRegion{locationcountry}
+}
+relationship OneToMany{
+	LocationRegion{locationcity} to LocationCity{locationregion}
+}
+relationship OneToMany{
+	LocationCountry{locationcity} to LocationCity{locationcountry}
+}
+relationship ManyToMany{
+	LocationCountry{user} to User{locationcountry}
+}
+relationship ManyToMany{
+	LocationRegion{user} to User{locationregion}
+}
+relationship ManyToMany{
+	LocationCity{user} to User{locationcity}
+}
+
+//Publication relationships
+
+relationship ManyToMany {
+	Publication{labelpublication} to LabelPublication{publication}
+}
+relationship OneToMany {
+	Publication{comments} to PublicationComments{publication}
+}
+relationship OneToMany{
+ 	CategoryPublication{subcategorypublication} to SubCategoryPublication{categoryPublication}
+}
+relationship OneToMany {
+ 	SubCategoryPublication{publication} to Publication{subcategorypublication}
+}
+
+//Library relationships
+
+relationship ManyToMany {
+	Library{labellibrary} to LabelLibrary{library}
+}
+relationship OneToMany{
+ 	CategoryLibrary{subcategoryLibrary} to SubCategoryLibrary{categoryLibrary}
+}
+relationship OneToMany {
+ 	SubCategoryLibrary{library} to Library{subcategoryLibrary}
+}
+relationship OneToMany{
+	Library{librarycomments} to LibraryComments{library}
+}
+
+//Employment relationships
+
+relationship ManyToMany {
+ 	LabelEmployment{employmentcv} to EmploymentCV{labelemployment}
+}
+relationship ManyToMany {
+ 	LabelEmployment{employmentjob} to EmploymentJob{labelemployment}
+}
+relationship OneToMany{
+ 	CategoryEmployment{subcategoryemployment} to SubCategoryEmployment{categoryemployment}
+}
+relationship OneToMany{
+ 	SubCategoryEmployment{employmentcv} to EmploymentCV{subcategoryemployment}
+}
+relationship OneToMany{
+ 	SubCategoryEmployment{employmentjob} to EmploymentJob{subcategoryemployment}
+}
+
+//QAS (question-answering system) relationships
+
+relationship OneToMany{
+Question{answer} to Answer{question}
+}
+relationship ManyToMany{
+QASLabels{question} to Question{qaslabels}
+}
+
+//Events relationships
+
+relationship OneToMany{
+Event{eventcomments} to EventComments{event}
+}
