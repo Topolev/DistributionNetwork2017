@@ -11,7 +11,7 @@ import java.util.List;
  * Spring Data JPA repository for the SubCategory entity.
  */
 @SuppressWarnings("unused")
-public interface SubCategoryRepository extends JpaRepository<SubCategory,Long> {
+public interface SubCategoryRepository extends JpaRepository<SubCategory,Long>, JpaSpecificationExecutor<SubCategory> {
 
     @Query("select distinct subCategory from SubCategory subCategory left join fetch subCategory.publications")
     List<SubCategory> findAllWithEagerRelationships();

@@ -9,9 +9,9 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('all-publications', {
+        .state('category-publications', {
             parent: 'template-publications',
-            url: '/publications',
+            url: '/category/:id/publications',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'distributionNetworkApp.jUser.home.title'
@@ -19,12 +19,12 @@
             views: {
                 'right-sidebar-publications@template-publications': {
                     templateUrl: 'app/publications/template-right-sidebar-publications.html',
-                    controller: 'AllPublicationsRightSidebarController',
+                    controller: 'CategoryPublicationsRightSidebarController',
                     controllerAs: 'vm'
                 },
                 'publications@template-publications':{
                     templateUrl: 'app/publications/template-list-publications.html',
-                    controller: 'AllPublicationsListPublicationsController',
+                    controller: 'CategoryPublicationsListPublicationsController',
                     controllerAs: 'vm'
                 }
             }

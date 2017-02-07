@@ -11,7 +11,7 @@ import java.util.List;
  * Spring Data JPA repository for the Publication entity.
  */
 @SuppressWarnings("unused")
-public interface PublicationRepository extends JpaRepository<Publication,Long> {
+public interface PublicationRepository extends JpaRepository<Publication,Long>, JpaSpecificationExecutor<Publication> {
 
     @Query("select distinct publication from Publication publication left join fetch publication.labels")
     List<Publication> findAllWithEagerRelationships();

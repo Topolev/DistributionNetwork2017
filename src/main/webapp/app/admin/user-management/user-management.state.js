@@ -49,7 +49,7 @@
             }        })
         .state('user-management-detail', {
             parent: 'admin',
-            url: '/user/:login',
+            url: '/user-managment/:login',
             data: {
                 authorities: ['ROLE_ADMIN'],
                 pageTitle: 'user-management.detail.title'

@@ -3,7 +3,11 @@ package com.distributionnetwork.app.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.distributionnetwork.app.domain.Category;
 
+import com.distributionnetwork.app.domain.SubCategory;
 import com.distributionnetwork.app.repository.CategoryRepository;
+import com.distributionnetwork.app.repository.specifications.SubCategorySpecifications;
+import com.distributionnetwork.app.service.CategoryService;
+import com.distributionnetwork.app.service.SubCategoryService;
 import com.distributionnetwork.app.web.rest.util.HeaderUtil;
 
 import org.slf4j.Logger;
@@ -20,6 +24,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import static com.distributionnetwork.app.repository.specifications.SubCategorySpecifications.*;
+import static org.springframework.http.HttpStatus.*;
+
 /**
  * REST controller for managing Category.
  */
@@ -28,9 +35,15 @@ import java.util.Optional;
 public class CategoryResource {
 
     private final Logger log = LoggerFactory.getLogger(CategoryResource.class);
-        
+
     @Inject
     private CategoryRepository categoryRepository;
+
+    @Inject
+    private CategoryService categoryService;
+
+    @Inject
+    private SubCategoryService subCategoryService;
 
     /**
      * POST  /categories : Create a new category.
@@ -81,11 +94,19 @@ public class CategoryResource {
      */
     @GetMapping("/categories")
     @Timed
-    public List<Category> getAllCategories() {
+    public ResponseEntity<List<Category>> getAllCategories(@RequestParam(required = false) Long categoryId) {
         log.debug("REST request to get all Categories");
-        List<Category> categories = categoryRepository.findAll();
-        return categories;
+        List<Category> categories = categoryService.findAll();
+        return new ResponseEntity<>(categories, OK);
     }
+
+    /*@GetMapping("/categories/{id}/subcategories")
+    public ResponseEntity<List<SubCategory>> getSubCategory(@PathVariable Long id){
+        log.debug("REST request to get SybCategory belong Category: {}", id);
+        List<SubCategory> subCategories = subCategoryService.findAll(subCategoriesBelongCategory(id));
+        return new ResponseEntity<>(subCategories, OK);
+    }*/
+
 
     /**
      * GET  /categories/:id : get the "id" category.
@@ -101,9 +122,11 @@ public class CategoryResource {
         return Optional.ofNullable(category)
             .map(result -> new ResponseEntity<>(
                 result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                OK))
+            .orElse(new ResponseEntity<>(NOT_FOUND));
     }
+
+
 
     /**
      * DELETE  /categories/:id : delete the "id" category.

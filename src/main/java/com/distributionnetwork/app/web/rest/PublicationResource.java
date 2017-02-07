@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.distributionnetwork.app.domain.Publication;
 
 import com.distributionnetwork.app.repository.PublicationRepository;
+import com.distributionnetwork.app.service.PublicationService;
 import com.distributionnetwork.app.web.rest.util.HeaderUtil;
 
 import org.slf4j.Logger;
@@ -14,10 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -28,9 +31,12 @@ import java.util.Optional;
 public class PublicationResource {
 
     private final Logger log = LoggerFactory.getLogger(PublicationResource.class);
-        
+
     @Inject
     private PublicationRepository publicationRepository;
+
+    @Inject
+    private PublicationService publicationService;
 
     /**
      * POST  /publications : Create a new publication.
@@ -81,10 +87,12 @@ public class PublicationResource {
      */
     @GetMapping("/publications")
     @Timed
-    public List<Publication> getAllPublications() {
+    public List<Publication> getAllPublications(HttpServletRequest request) {
         log.debug("REST request to get all Publications");
-        List<Publication> publications = publicationRepository.findAllWithEagerRelationships();
-        return publications;
+
+        Map<String, String[]> paramsSearchMap = request.getParameterMap();
+
+        return publicationService.searchPublication(paramsSearchMap);
     }
 
     /**

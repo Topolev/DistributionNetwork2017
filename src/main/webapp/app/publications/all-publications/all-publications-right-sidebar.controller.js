@@ -12,6 +12,7 @@
 
         vm.title = "Category";
         vm.links = [];
+        vm.routerTemplate = "category-publications({id:%id%})";
 
         loadAll();
 

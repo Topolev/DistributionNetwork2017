@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -47,6 +48,9 @@ public class Publication implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SubCategory> subCategories = new HashSet<>();
+
+    @Column(name = "created_date")
+    private ZonedDateTime createdDate;
 
     public Long getId() {
         return id;
@@ -143,6 +147,15 @@ public class Publication implements Serializable {
 
     public void setSubCategories(Set<SubCategory> subCategories) {
         this.subCategories = subCategories;
+    }
+
+
+    public ZonedDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(ZonedDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
     @Override

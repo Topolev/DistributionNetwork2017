@@ -47,6 +47,27 @@
                     }]
 
                 }
-            });
+            })
+            .state('user-detail', {
+            parent: 'entity',
+            url: '/user/:login',
+            data: {
+                authorities: ['ROLE_ADMIN'],
+                pageTitle: 'user-management.detail.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/admin/user-management/user-management-detail.html',
+                    controller: 'UserManagementDetailController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('user-management');
+                    return $translate.refresh();
+                }]
+            }
+        });
     }
 })();

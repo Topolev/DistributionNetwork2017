@@ -27,18 +27,22 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="text" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
         <createTable tableName="publication_labels">
             <column name="labels_id" type="bigint">
                 <constraints nullable="false"/>
@@ -49,6 +53,6 @@
         </createTable>
 
         <addPrimaryKey columnNames="publications_id, labels_id" tableName="publication_labels"/>
-        
+
     </changeSet>
 </databaseChangeLog>

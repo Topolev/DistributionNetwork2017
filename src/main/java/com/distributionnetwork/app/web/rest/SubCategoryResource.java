@@ -1,9 +1,12 @@
 package com.distributionnetwork.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.distributionnetwork.app.domain.Category;
 import com.distributionnetwork.app.domain.SubCategory;
 
 import com.distributionnetwork.app.repository.SubCategoryRepository;
+import com.distributionnetwork.app.repository.specifications.SubCategorySpecifications;
+import com.distributionnetwork.app.service.SubCategoryService;
 import com.distributionnetwork.app.web.rest.util.HeaderUtil;
 
 import org.slf4j.Logger;
@@ -20,6 +23,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import static com.distributionnetwork.app.repository.specifications.SubCategorySpecifications.subCategoriesBelongCategory;
+
 /**
  * REST controller for managing SubCategory.
  */
@@ -28,9 +33,12 @@ import java.util.Optional;
 public class SubCategoryResource {
 
     private final Logger log = LoggerFactory.getLogger(SubCategoryResource.class);
-        
+
     @Inject
     private SubCategoryRepository subCategoryRepository;
+
+    @Inject
+    private SubCategoryService subCategoryService;
 
     /**
      * POST  /sub-categories : Create a new subCategory.
@@ -84,6 +92,14 @@ public class SubCategoryResource {
     public List<SubCategory> getAllSubCategories() {
         log.debug("REST request to get all SubCategories");
         List<SubCategory> subCategories = subCategoryRepository.findAllWithEagerRelationships();
+        return subCategories;
+    }
+
+    @GetMapping("/categories/{id}/sub-categories")
+    @Timed
+    public List<SubCategory> getAllSubCategoriesBelongCategory(@PathVariable Long id) {
+        log.debug("REST request to get all SubCategories belong Category {}", id);
+        List<SubCategory> subCategories = subCategoryService.findAll(subCategoriesBelongCategory(id));
         return subCategories;
     }
 

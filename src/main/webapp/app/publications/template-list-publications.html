@@ -1,5 +1,11 @@
-<ul>
-    <li ng-repeat="publication in vm.publications">
-        {{publication.name}}
-    </li>
-</ul>
+<div ng-repeat="publication in vm.publications" class="item-publication">
+    <span>{{publication.createdDate}}</span>
+    <h4><a ui-sref="publication-detail({id:publication.id})">{{publication.name}}</a></h4>
+    <!--<div>Категория: {{publication.category.name}}</div>-->
+    <div>Автор: <a ui-sref="user-detail({login:publication.user.login})">{{publication.user.login}}</a></div>
+    <div>Метки:
+        <span ng-repeat="label in publication.labels">
+            {{label.name}},
+        </span>
+    </div>
+</div>

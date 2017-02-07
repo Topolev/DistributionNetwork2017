@@ -5,9 +5,9 @@
         .module('distributionNetworkApp')
         .controller('PublicationDetailController', PublicationDetailController);
 
-    PublicationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Publication', 'Label', 'JUser', 'SubCategory'];
+    PublicationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Publication', 'Label', 'SubCategory'];
 
-    function PublicationDetailController($scope, $rootScope, $stateParams, previousState, entity, Publication, Label, JUser, SubCategory) {
+    function PublicationDetailController($scope, $rootScope, $stateParams, previousState, entity, Publication, Label, SubCategory) {
         var vm = this;
 
         vm.publication = entity;

@@ -18,5 +18,6 @@
     <include file="classpath:config/liquibase/changelog/20170205185218_populated_Category.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170205190000_populated_SubCategory.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170205202300_populated_Publication.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170205214500_populated_Label_relation_LabelPublication.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
