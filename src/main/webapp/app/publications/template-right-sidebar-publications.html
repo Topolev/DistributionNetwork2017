@@ -1,7 +1,13 @@
-<h1>
-    <a href="" class="btn btn-primary">Создать публикацию</a>
-    <h1>{{vm.title}}</h1>
-    <ul class="nav">
-        <li ng-repeat="link in vm.links"><a ui-sref="{{vm.routerTemplate.replace('%id%',link.id)}}">{{link.name}}</a></li>
-    </ul>
-</h1>
+<div class="wrap-right-sidebar-publication">
+    <a ui-sref="create-publication" class="btn btn-primary create-publication">Создать публикацию</a>
+
+    <div class="wrap-items-right-sidebar-publication">
+        <h3><i class="fa fa-link" aria-hidden="true"></i>{{vm.title}}</h3>
+        <ul class="nav">
+            <li ng-repeat="link in vm.links"><a
+                ui-sref="{{vm.routerTemplate.replace('%id%',link.id)}}"><i class="fa fa-chevron-right" aria-hidden="true"></i>
+                {{link.name}}</a></li>
+        </ul>
+    </div>
+</div>
+

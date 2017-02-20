@@ -1,16 +1,15 @@
 package com.distributionnetwork.app.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Publication.
@@ -34,7 +33,7 @@ public class Publication implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "publication_labels",
                joinColumns = @JoinColumn(name="publications_id", referencedColumnName="ID"),
@@ -45,7 +44,6 @@ public class Publication implements Serializable {
     private User user;
 
     @ManyToMany(mappedBy = "publications")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SubCategory> subCategories = new HashSet<>();
 

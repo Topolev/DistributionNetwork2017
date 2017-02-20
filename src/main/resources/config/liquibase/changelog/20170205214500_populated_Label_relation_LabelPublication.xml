@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 
     <!--
@@ -23,6 +20,12 @@
                   file="config/liquibase/publication_label.csv"
                   separator=";"
                   tableName="publication_labels"/>
+    </changeSet>
 
+    <changeSet id="20170205214500-3" author="topolev">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/publication_subcategory.csv"
+                  separator=";"
+                  tableName="sub_category_publications"/>
     </changeSet>
 </databaseChangeLog>

@@ -19,7 +19,10 @@
             'angular-loading-bar',
             'slickCarousel',
             'ngImgCrop',
-            'ngFileUpload'
+            'ngFileUpload',
+            'ui.select',
+            'ngSanitize',
+            'ckeditor'
         ])
         .run(run);
 

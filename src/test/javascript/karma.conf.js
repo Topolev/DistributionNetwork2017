@@ -29,6 +29,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/sockjs-client/dist/sockjs.js',
             'src/main/webapp/bower_components/stomp-websocket/lib/stomp.min.js',
             'src/main/webapp/bower_components/slick-carousel/slick/slick.js',
+            'src/main/webapp/bower_components/ckeditor/ckeditor.js',
             'src/main/webapp/bower_components/angular/angular.js',
             'src/main/webapp/bower_components/angular-aria/angular-aria.js',
             'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -49,6 +50,8 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
             'src/main/webapp/bower_components/angular-slick-carousel/dist/angular-slick.js',
             'src/main/webapp/bower_components/ng-img-crop/compile/minified/ng-img-crop.js',
+            'src/main/webapp/bower_components/angular-ui-select/dist/select.js',
+            'src/main/webapp/bower_components/angular-ckeditor/angular-ckeditor.js',
             'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'src/main/webapp/app/app.module.js',

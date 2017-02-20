@@ -2,13 +2,11 @@ package com.distributionnetwork.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.distributionnetwork.app.domain.Label;
-
 import com.distributionnetwork.app.repository.LabelRepository;
+import com.distributionnetwork.app.service.LabelService;
 import com.distributionnetwork.app.web.rest.util.HeaderUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +26,12 @@ import java.util.Optional;
 public class LabelResource {
 
     private final Logger log = LoggerFactory.getLogger(LabelResource.class);
-        
+
     @Inject
     private LabelRepository labelRepository;
+
+    @Inject
+    private LabelService labelService;
 
     /**
      * POST  /labels : Create a new label.
@@ -81,10 +82,13 @@ public class LabelResource {
      */
     @GetMapping("/labels")
     @Timed
-    public List<Label> getAllLabels() {
+    public List<Label> getAllLabels(@RequestParam(required = false) String partialName) {
         log.debug("REST request to get all Labels");
-        List<Label> labels = labelRepository.findAll();
-        return labels;
+
+        if (partialName==null){
+            return labelService.findAll();
+        }
+        return labelService.getLabelByPartialName(partialName);
     }
 
     /**

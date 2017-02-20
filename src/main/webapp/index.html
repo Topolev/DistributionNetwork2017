@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
     <link rel="stylesheet" href="bower_components/ng-img-crop/compile/minified/ng-img-crop.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
     <!-- endinject -->
     <link rel="stylesheet" href="content/css/vendor.css">
     <!-- endbuild -->
@@ -30,12 +31,41 @@
 <div class="container-fluid">
     <div ui-view="content">
     </div>
-    <div class="well">
-        <!-- Angular views -->
-    </div>
+</div>
+<div class="wrap-footer" ng-cloak>
+    <div class="footer container">
+        <div class="row wrap-footer-items">
+            <div class="col-md-2">
+                <div class="footer-item">
+                    <h4>Разделы</h4>
+                    <ul class="nav">
+                        <li><a href="">Публикации</a></li>
+                        <li><a href="">Пользователи</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <div class="footer-item">
+                    <h4>Follow us</h4>
 
-    <div class="footer" ng-cloak>
-        <p data-translate="footer">This is your footer</p>
+                    <div class="social-network">
+                    <a href=""><i class="fa fa-vk" aria-hidden="true"></i></a>
+                    <a href=""><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                    <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer">
+            <p>© 2017 DistributionNetwork. All Rights Reserved.</p>
+        </div>
     </div>
 </div>
 
@@ -57,6 +87,7 @@
 <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
 <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
 <script src="bower_components/slick-carousel/slick/slick.js"></script>
+<script src="bower_components/ckeditor/ckeditor.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -77,6 +108,8 @@
 <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
 <script src="bower_components/angular-slick-carousel/dist/angular-slick.js"></script>
 <script src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+<script src="bower_components/angular-ui-select/dist/select.js"></script>
+<script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 
@@ -86,6 +119,7 @@
 <script src="app/services/user/user.service.js"></script>
 <script src="app/services/profiles/profile.service.js"></script>
 <script src="app/services/profiles/page-ribbon.directive.js"></script>
+<script src="app/services/hierarchy/hierarchy.service.js"></script>
 <script src="app/services/auth/sessions.service.js"></script>
 <script src="app/services/auth/register.service.js"></script>
 <script src="app/services/auth/principal.service.js"></script>
@@ -101,6 +135,8 @@
 <script src="app/publications/template-publications.state.js"></script>
 <script src="app/publications/subcategory-publications/subcategory-publications-list-publications.controller.js"></script>
 <script src="app/publications/subcategory-publications/subcategory-publications.state.js"></script>
+<script src="app/publications/create-publication/create-publication.state.js"></script>
+<script src="app/publications/create-publication/create-publication.controller.js"></script>
 <script src="app/publications/category-publications/category-publications-right-sidebar.controller.js"></script>
 <script src="app/publications/category-publications/category-publications-list-publications.controller.js"></script>
 <script src="app/publications/category-publications/category-publications.state.js"></script>

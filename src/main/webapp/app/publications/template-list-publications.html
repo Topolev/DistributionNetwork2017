@@ -1,11 +1,37 @@
-<div ng-repeat="publication in vm.publications" class="item-publication">
-    <span>{{publication.createdDate}}</span>
-    <h4><a ui-sref="publication-detail({id:publication.id})">{{publication.name}}</a></h4>
-    <!--<div>Категория: {{publication.category.name}}</div>-->
-    <div>Автор: <a ui-sref="user-detail({login:publication.user.login})">{{publication.user.login}}</a></div>
-    <div>Метки:
-        <span ng-repeat="label in publication.labels">
-            {{label.name}},
-        </span>
+<div class="wrap-items-publications">
+    <div ng-repeat="publication in vm.publications" class="item-publication">
+        <span class="date-publish">Опубликовано {{publication.createdDate | date: 'dd MMM yyyy'}}</span>
+        <h4><a ui-sref="publication-detail({id:publication.id})">{{publication.name}}</a></h4>
+
+        <div class="author-publication">
+            <img ng-src="/api/users/photo/{{publication.user.login}}" check-image-user>
+            <div class="author-info">
+                <p>{{publication.user.firstName}} {{publication.user.lastName}} </p>
+                <a>@{{publication.user.login}}</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="intro-publication" ng-bind-html="publication.text.substring(0,200) + '...'">
+        </div>
+
+        <div class="labels">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a ng-repeat="label in publication.labels">
+                {{label.name}}
+                <span ng-show="!$last">,</span>
+            </a>
+        </div>
+
+        <div class="action-publication">
+            <a href="" class="btn btn-default-inverse">Читать дальше</a>
+            <div class="statistic-publication">
+                <a href=""><i class="fa fa-star-o" aria-hidden="true"></i> 13</a>
+                <a href=""><i class="fa fa-comments-o" aria-hidden="true"></i> 123</a>
+                <span><i class="fa fa-eye" aria-hidden="true"></i> 123</span>
+            </div>
+
+
+        </div>
     </div>
 </div>

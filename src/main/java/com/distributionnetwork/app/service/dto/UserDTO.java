@@ -1,13 +1,12 @@
 package com.distributionnetwork.app.service.dto;
 
 import com.distributionnetwork.app.config.Constants;
-
 import com.distributionnetwork.app.domain.Authority;
 import com.distributionnetwork.app.domain.User;
-
 import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,6 +14,9 @@ import java.util.stream.Collectors;
  * A DTO representing a user, with his authorities.
  */
 public class UserDTO {
+
+
+    private Long id;
 
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
@@ -45,6 +47,7 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()));
+        this.id = user.getId();
     }
 
     public UserDTO(String login, String firstName, String lastName,
@@ -85,6 +88,14 @@ public class UserDTO {
 
     public Set<String> getAuthorities() {
         return authorities;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

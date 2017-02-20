@@ -1,28 +1,40 @@
 
-<div>
-    <h2><span data-translate="distributionNetworkApp.publication.detail.title">Publication</span> {{vm.publication.id}}</h2>
-    <hr>
+
+<div class="container">
+<div class="article">
     <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="distributionNetworkApp.publication.name">Name</span></dt>
-        <dd>
-            <span>{{vm.publication.name}}</span>
-        </dd>
-        <dt><span data-translate="distributionNetworkApp.publication.text">Text</span></dt>
-        <dd>
-            <span>{{vm.publication.text}}</span>
-        </dd>
-        <dt><span data-translate="distributionNetworkApp.publication.labels">Labels</span></dt>
-        <dd>
-            <span ng-repeat="labels in vm.publication.labels">
-                <a ui-sref="label-detail({id: labels.id})">{{labels.id}}</a>{{$last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span data-translate="distributionNetworkApp.publication.user">User</span></dt>
-        <dd>
-            <a ui-sref="j-user-detail({id:vm.publication.user.id})">{{vm.publication.user.id}}</a>
-        </dd>
-    </dl>
+
+    <h1>{{vm.publication.name}}</h1>
+    <div class="common-info">
+        Опубликовано: {{vm.publication.createdDate | date: 'dd MMM yyyy'}} |
+        <div class="labels">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a ng-repeat="label in vm.publication.labels">
+                {{label.name}}
+                <span ng-show="!$last">,</span>
+            </a>
+        </div>
+    </div>
+    <div class="author-info-article row">
+        <div class="col-md-8 author-publication">
+            <img ng-src="/api/users/photo/{{vm.publication.user.login}}" check-image-user/>
+            <div class="author-info">
+                <p>{{vm.publication.user.firstName}} {{vm.publication.user.lastName}}</p>
+                <a>@{{vm.publication.user.login}}</a>
+            </div>
+        </div>
+        <div class="col-md-4 article-statistic">
+            <ul class="nav navbar-nav">
+                <li><a href=""><i class="fa fa-star-o" aria-hidden="true"></i><span>9000</span></a></M></li>
+                <li><a href=""><i class="fa fa-comments-o" aria-hidden="true"></i><span>2000</span></a></M></li>
+                <li><a href=""><i class="fa fa-eye" aria-hidden="true"></i><span>9000</span></a></M></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="article-content" ng-bind-html="vm.publication.text">
+    </div>
+
 
     <button type="submit"
             ui-sref="{{ vm.previousState }}"
@@ -34,4 +46,5 @@
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
     </button>
+</div>
 </div>

@@ -1,0 +1,56 @@
+<div class="container">
+
+    <div class="form-group">
+        <label>Категория</label>
+        <ui-select ng-model="vm.selectedCategory" theme="bootstrap" ng-disabled="false"
+                   title="Choose a country" append-to-body="true">
+            <ui-select-match placeholder="Выберите категорию">{{$select.selected.name}}
+            </ui-select-match>
+            <ui-select-choices repeat="category in vm.categories | filter: $select.search">
+                <span ng-bind-html="category.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+
+
+    <div class="form-group">
+        <label>Раздел</label>
+
+        <ui-select ng-model="vm.publication.subCategories" multiple theme="bootstrap" title="Выберите раздел" limit="5">
+            <ui-select-match placeholder="Выберите раздел">{{$item.name}}</ui-select-match>
+            <ui-select-choices repeat="subCategory in vm.subCategories | filter: $select.search">
+                <div ng-bind-html="subCategory.name | highlight: $select.search"></div>
+            </ui-select-choices>
+        </ui-select>
+
+
+    </div>
+
+
+
+    <div class="form-group">
+        <label>Название статьи</label>
+        <input type="text" class="form-control" ng-model="vm.publication.name">
+    </div>
+
+    <div class="form-group">
+        <label>Текст</label>
+        <div ckeditor="vm.options" ng-model="vm.publication.text" ready="vm.onReady()"></div>
+    </div>
+
+    <div class=form-group>
+        <label>Метки</label>
+        <ui-select multiple tagging tagging-label="false" ng-model="vm.publication.labels" theme="bootstrap" sortable="true"  title="Создайки якоря">
+            <ui-select-match placeholder="Создайте якоря ">{{$item.name}}</ui-select-match>
+            <ui-select-choices repeat="label in vm.labels | filter:$select.search" refresh="vm.refreshLabel($select)"
+                               minimum-input-length="2"
+                               refresh-delay="10">
+
+                <div ng-bind-html="label.name | highlight: $select.search"></div>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+
+    <button class="btn btn-primary" ng-click="vm.save()">Опубликовать</button>
+</div>
+
